@@ -1,0 +1,175 @@
+/* Reset default browser styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body,
+html {
+  font-size: 1.5em;
+  width: 100%;
+  height: 100%;
+  font-family: "Roboto", sans-serif;
+  background: linear-gradient(
+    135deg,
+    #2c3e50 0%,
+    #4b6584 100%
+  ); /* Darkened gradient */
+  overflow: hidden;
+  position: relative;
+}
+
+/* Optional: Add a dark overlay to further enhance text visibility */
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
+  z-index: 1;
+}
+
+/* Ensure other elements are above the overlay */
+.instruction-overlay,
+.slideshow-container,
+.cloud-container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Instruction Overlay Styles */
+.instruction-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7); /* Darker overlay */
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  z-index: 10;
+  text-align: center;
+  padding: 20px;
+}
+
+.instruction-overlay p {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+
+.close-instruction {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 2em;
+  cursor: pointer;
+}
+
+/* Updated Cloud Animation Styles */
+.cloud-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh; /* Full viewport height */
+  width: 300%; /* Triple the viewport width for three clouds */
+  display: flex;
+  align-items: center;
+  animation: moveClouds 90s linear infinite; /* Increased duration for smoother transition */
+  z-index: 1;
+  pointer-events: none; /* Allow clicks through clouds */
+}
+
+.cloud {
+  height: 100%; /* Span the full height */
+  width: auto; /* Maintain aspect ratio */
+}
+
+.duplicate {
+  /* Optional Enhancements for Variation */
+  transform: scaleX(-1); /* Flip horizontally for diversity */
+  opacity: 0.8; /* Slightly transparent duplicates */
+}
+
+/* Updated Animation for Triple Clouds */
+@keyframes moveClouds {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(
+      -66.666%
+    ); /* Move left by two-thirds of container width */
+  }
+}
+
+/* Slideshow Styles */
+.slideshow-container {
+  position: relative;
+  width: 60%;
+  max-width: 800px;
+  margin: 0 auto;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  text-align: center;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Enhanced text shadow for better visibility */
+}
+
+/* Increase text size on desktop */
+@media (min-width: 769px) {
+  .slide {
+    font-size: 2.5em;
+    line-height: 1.6em;
+  }
+}
+
+/* Default slide styles */
+.slide {
+  display: none;
+  font-size: 1.5em;
+  line-height: 1.5em;
+  font-family: "Great Vibes", cursive;
+  padding: 10px;
+}
+
+/* Fade Animation */
+.fade {
+  animation: fadeEffect 2s;
+}
+
+@keyframes fadeEffect {
+  from {
+    opacity: 0.4;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .slideshow-container {
+    width: 80%;
+  }
+
+  .slide {
+    font-size: 1.8em;
+  }
+
+  .cloud-container {
+    width: 300%;
+    animation: moveClouds 135s linear infinite; /* Slower animation on smaller screens */
+  }
+
+  /* Optional: Adjust duplicate cloud for better visibility on smaller screens */
+  .duplicate {
+    opacity: 0.7;
+  }
+}
