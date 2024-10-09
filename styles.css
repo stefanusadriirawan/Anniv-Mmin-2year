@@ -1,4 +1,4 @@
-/* Reset default browser styles */
+/* Reset and Base Styles */
 * {
   margin: 0;
   padding: 0;
@@ -11,16 +11,12 @@ html {
   width: 100%;
   height: 100%;
   font-family: "Roboto", sans-serif;
-  background: linear-gradient(
-    135deg,
-    #2c3e50 0%,
-    #4b6584 100%
-  ); /* Darkened gradient */
+  background: linear-gradient(135deg, #2c3e50 0%, #4b6584 100%);
   overflow: hidden;
   position: relative;
 }
 
-/* Optional: Add a dark overlay to further enhance text visibility */
+/* Dark Overlay for Text Visibility */
 body::before {
   content: "";
   position: absolute;
@@ -28,11 +24,11 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
-  z-index: 1;
+  background-color: rgba(233, 159, 233, 0.849);
+  z-index: 0;
 }
 
-/* Ensure other elements are above the overlay */
+/* Higher z-index for Main Elements */
 .instruction-overlay,
 .slideshow-container,
 .cloud-container {
@@ -47,7 +43,7 @@ body::before {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.7); /* Darker overlay */
+  background-color: rgba(0, 0, 0, 0.7);
   color: #fff;
   display: flex;
   align-items: center;
@@ -71,40 +67,45 @@ body::before {
   cursor: pointer;
 }
 
-/* Updated Cloud Animation Styles */
+/* Cloud Container Styles */
 .cloud-container {
   position: absolute;
   top: 0;
   left: 0;
-  height: 100vh; /* Full viewport height */
-  width: 300%; /* Triple the viewport width for three clouds */
+  height: 100vh;
+  width: 200%;
   display: flex;
-  align-items: center;
-  animation: moveClouds 90s linear infinite; /* Increased duration for smoother transition */
+  align-items: stretch;
+  animation: moveClouds 300s linear infinite;
   z-index: 1;
-  pointer-events: none; /* Allow clicks through clouds */
+  pointer-events: none;
+}
+
+.cloud-set {
+  display: flex;
+  width: 50%;
+  align-items: stretch;
 }
 
 .cloud {
-  height: 100%; /* Span the full height */
-  width: auto; /* Maintain aspect ratio */
+  height: 100%;
+  width: auto;
+  display: block;
+  object-fit: cover;
 }
 
 .duplicate {
-  /* Optional Enhancements for Variation */
-  transform: scaleX(-1); /* Flip horizontally for diversity */
-  opacity: 0.8; /* Slightly transparent duplicates */
+  transform: scaleX(-1);
+  opacity: 0.8;
 }
 
-/* Updated Animation for Triple Clouds */
+/* Cloud Animation */
 @keyframes moveClouds {
   0% {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(
-      -66.666%
-    ); /* Move left by two-thirds of container width */
+    transform: translateX(-50%);
   }
 }
 
@@ -119,18 +120,9 @@ body::before {
   z-index: 2;
   text-align: center;
   color: #fff;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Enhanced text shadow for better visibility */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
 }
 
-/* Increase text size on desktop */
-@media (min-width: 769px) {
-  .slide {
-    font-size: 2.5em;
-    line-height: 1.6em;
-  }
-}
-
-/* Default slide styles */
 .slide {
   display: none;
   font-size: 1.5em;
@@ -139,7 +131,6 @@ body::before {
   padding: 10px;
 }
 
-/* Fade Animation */
 .fade {
   animation: fadeEffect 2s;
 }
@@ -154,6 +145,13 @@ body::before {
 }
 
 /* Responsive Design */
+@media (min-width: 769px) {
+  .slide {
+    font-size: 2.5em;
+    line-height: 1.6em;
+  }
+}
+
 @media (max-width: 768px) {
   .slideshow-container {
     width: 80%;
@@ -164,11 +162,9 @@ body::before {
   }
 
   .cloud-container {
-    width: 300%;
-    animation: moveClouds 135s linear infinite; /* Slower animation on smaller screens */
+    animation: moveClouds 300s linear infinite;
   }
 
-  /* Optional: Adjust duplicate cloud for better visibility on smaller screens */
   .duplicate {
     opacity: 0.7;
   }
